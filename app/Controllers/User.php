@@ -9,6 +9,9 @@ class User extends BaseController
 
     public function index()
     {
+        if(session()->level != 'Admin'){
+             return redirect()->to('home')->with('success','Anda tidak bisa mengakses halaman ini');
+        }else{
         $user = new UserM();
         $data = [
             'title'=> 'Tabel User',
@@ -18,9 +21,13 @@ class User extends BaseController
             'user'=>$user->getUser()
         ];
         return view('tbl_user',$data);
+        }
     }
 
     public function add(){
+        if(session()->level != 'Admin'){
+            return redirect()->to('home')->with('success','Anda tidak bisa mengakses halaman ini');
+       }
         $data = [
             'title'=> 'Tambah User',
             'active1'=> '',
@@ -31,6 +38,9 @@ class User extends BaseController
     }
     
     public function detail($id_user){
+        if(session()->level != 'Admin'){
+            return redirect()->to('home')->with('success','Anda tidak bisa mengakses halaman ini');
+        }
         $user = new UserM();
         $data = [
             'user'=>$user->detail($id_user)
@@ -39,6 +49,9 @@ class User extends BaseController
     }
 
     public function edit($id_user){
+        if(session()->level != 'Admin'){
+            return redirect()->to('home')->with('success','Anda tidak bisa mengakses halaman ini');
+        }
         $user = new UserM();
         $data = [
             'user'=>$user->detail($id_user)
@@ -47,16 +60,21 @@ class User extends BaseController
     }
 
     public function simpan(){
+        if(session()->level != 'Admin'){
+            return redirect()->to('home')->with('success','Anda tidak bisa mengakses halaman ini');
+       }
        $user = new UserM();
        $foto = $this->request->getFile('foto');
        if($foto->isValid() && ! $foto->hasMoved()){
         $fotoName = $foto->getClientName();
         $foto->move('images/',$fotoName);
        }
-
+       $pass = $this->request->getPost('password');
+       $password = password_hash($pass, PASSWORD_DEFAULT);
        $data = [
         'foto' => $fotoName,
         'username' => $this->request->getPost('username'),
+        'password' => $password,
         'nama' => $this->request->getPost('nama'), 
         'nip' => $this->request->getPost('nip'),
         'bidang' => $this->request->getPost('bidang'),
@@ -77,6 +95,9 @@ class User extends BaseController
     // edit
     public function update($id_user)
     {
+        if(session()->level != 'Admin'){
+            return redirect()->to('home')->with('success','Anda tidak bisa mengakses halaman ini');
+        }
         $user = new UserM();
         $user = $user->detail($id_user);
         $foto = $this->request->getFile('foto');
@@ -84,8 +105,10 @@ class User extends BaseController
          $fotoName = $foto->getClientName();
          $foto->move('images/',$fotoName);
         }
- 
+        //$foto = $user['foto'];
+        //unlink('images/'.$foto);
         $data = [
+         'id_user' => $id_user,
          'foto' => $fotoName,
          'username' => $this->request->getPost('username'),
          'nama' => $this->request->getPost('nama'), 
@@ -106,6 +129,9 @@ class User extends BaseController
     // Delete
 	public function delete($id_user)
 	{
+        if(session()->level != 'Admin'){
+            return redirect()->to('home')->with('success','Anda tidak bisa mengakses halaman ini');
+        }
         $user = new UserM();
         $data = $user->detail($id_user);
         unlink('images/'.$data['foto']);

@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title><?php if($title) echo $title ?></title>
+    <title>xxx</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -50,8 +50,8 @@
                 <!-- Messages Dropdown Menu -->
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <img class="img-profile rounded-circle" src="<?= base_url('dist/img/user1-128x128.jpg')?>">
-                        <span class="mr-2 d-none d-lg-inline small">Douglas McGee</span>
+                        <img class="img-profile rounded-circle" src="<?= base_url('images/'.session()->get('foto'))?>">
+                        <span class="mr-2 d-none d-lg-inline small"><?= session()->get('nama') ?></span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
                         <a class="dropdown-item" href="<?= base_url('profile') ?>">
@@ -82,7 +82,7 @@
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <li class="nav-item">
-                            <a href="<?= base_url('dash_tem') ?>" class="nav-link <?php  if($active1) echo $active1 ?>">
+                            <a href="<?= base_url('dash_tem') ?>" class="nav-link">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>Dashboard</p>
                             </a>
@@ -93,12 +93,14 @@
                                 <p>Documentation</p>
                             </a>
                         </li>
+                        <?php if (session()->get('level')=='Admin') { ?>
                         <li class="nav-item">
-                            <a href="<?= base_url('User') ?>" class="nav-link <?php  if($active3) echo $active3 ?>">
+                            <a href="<?= base_url('User') ?>" class="nav-link">
                                 <i class="nav-icon fas fa-users"></i>
                                 <p>User</p>
                             </a>
                         </li>
+                        <?php } ?>
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->
@@ -113,7 +115,7 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0"><?php if($title2) echo $title2 ?></h1>
+                            <h1 class="m-0"></h1>
                         </div>
                     </div>
                     <!-- /.row -->
@@ -152,7 +154,7 @@
     <!-- Bootstrap 4 -->
     <script src = "<?= base_url('plugins/bootstrap/js/bootstrap.bundle.min.js')?>"></script>
     <!-- AdminLTE App -->
-    <script src="<?=('dist/js/adminlte.js')?>"></script>
+    <script src="<?= base_url('dist/js/adminlte.js')?>"></script>
     <script src = "<?= base_url('plugins/select2/js/select2.full.min.js')?>"></script>
     <!-- DataTables  & Plugins -->
     <script src = "<?= base_url('plugins/datatables/jquery.dataTables.min.js')?>"></script>
@@ -169,15 +171,22 @@
     <script src = "<?= base_url('plugins/sweetalert2/sweetalert2.min.js')?>"></script>
 
     <script>
+        let kat1 = $("#filter-kat1").val()
+        let kat2 = $("#filter-kat2").val()
         $(function() {
             //Initialize Select2 Elements
             $('.select2').select2()
             $("#example1").DataTable({
-                "responsive": true,
+                responsive: {
+                    details: {
+                        type: 'column',
+                        target: 0
+                    }
+                },
                 "lengthChange": true,
                 "autoWidth": true,
                 "buttons": ["copy", "csv", "excel", "print", "colvis"],
-                    initComplete: function () {
+                   /* initComplete: function () {
                         var counter = 0;
                         this.api().columns( [5,6] ).every( function () {
                             var column = this;
@@ -215,10 +224,115 @@
                                 select.append( '<option value="'+d+'">'+d+'</option>' );
                             } );
                         } );
-                    }
-            }).buttons().container().appendTo('#example1_wrapper');
-            
+                    }*/
+            }).buttons().container().appendTo('#example1_wrapper');   
         })
+/*
+        $(document).ready(function(){
+            var tb_surat = $("#tbl_search").DataTable({
+                autoWidth: false,
+                serverSide : true,
+                processing: true,
+                order: [[1, 'asc']],
+                columnDefs: [{
+                    orderable: false,
+                    targets: [0,5]
+                }],
+
+                ajax : {
+                    url: "<?= base_url('surat/getdata') ?>",
+                    method : 'POST'
+                },
+
+                columns: [
+                    {
+                        "data": null
+                    },
+                    {
+                        "data": "surat_dari"
+                    },
+                    {
+                        "data": "author"
+                    },
+                    {
+                        "data": "description"
+                    },
+                    {
+                        
+                    },
+                    {
+                        "data": function(data) {
+                            return `<td class="text-right py-0 align-middle">
+                                    <div class="btn-group btn-group-sm">
+                                        <button class="btn btn-primary btn-edit" data-id="${data.id}"><i class="fas fa-pencil-alt"></i></button>
+                                        <button class="btn btn-danger btn-delete" data-id="${data.id}"><i class="fas fa-trash"></i></button>
+                                    </div>
+                                    </td>`
+                        }
+                    }
+                ]
+            })
+        });
+    */
+       
+    $(document).ready( function () {
+           var table = $("#tbl_search").DataTable({
+                    "responsive": true,
+                    "lengthChange": true,
+                    "autoWidth": true,
+                    "orderCellsTop": true,
+                    "buttons": ["copy", "csv", "excel", "print", "colvis"],
+                    dom:
+                    "<'row'<'col-md-3'l><'col-md-5'B><'col-md-4'f>>"+
+                    "<'row'<'col-md-12'tr>>" +
+                    "<'row'<'col-md-5'i><'col-md-7'p>>",
+                    lengthMenu:[
+                        [5,10,25,50,100,-1],
+                        [5,10,25,50,100,"All"],
+                    ]
+            });
+            table.buttons().container().appendTo('#tbl_search .col-md-6:eq(0)');
+            // Office Column search Select
+            $('#filterkat1').on('change', function() {
+                table.column(5).search( this.value).draw();
+            });
+            // Clear Office search select and redraw column
+            $('#btnfilterkat1').on('click', function() {
+                $("#filterkat1").val('');
+                table.search('').columns(5).search('').draw();
+            });
+
+            // Office Column search Select
+            $('#filterkat2').on('change', function() {
+                table.column(6).search( this.value).draw();
+            });
+            // Clear Office search select and redraw column
+            $('#btnfilterkat2').on('click', function() {
+                $("#filterkat2").val('');
+                table.search('').columns(6).search('').draw();
+            });
+
+             // Office Column search Select
+             $('#filterbulan').on('change', function() {
+                table.column(2).search( this.value).draw();
+            });
+            // Clear Office search select and redraw column
+            $('#btnfilterbulan').on('click', function() {
+                $("#filterbulan").val('');
+                table.search('').columns(2).search('').draw();
+            });
+
+             // Office Column search Select
+             $('#filtertahun').on('change', function() {
+                table.column(2).search( this.value).draw();
+            });
+            // Clear Office search select and redraw column
+            $('#btnfiltertahun').on('click', function() {
+                $("#filtertahun").val('');
+                table.search('').columns(2).search('').draw();
+            });
+    } );
+
         $('.hapus_notif').on('click', function(){
             var getLink = $(this).attr('href');
                 Swal.fire({
@@ -245,7 +359,12 @@
                 icon: "success",
                 timer: 2000
             });
-        }
+        }    
+        $(".filter").on('change',function(){
+            //console.log("Filter");
+            
+            //console.log([kat1,kat2])
+        })
 /*
         function sel(){
             $("#s_s").DataTable({

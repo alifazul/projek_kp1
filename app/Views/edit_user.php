@@ -10,21 +10,53 @@
     </div>
     <!-- /.card-header -->
     <div class="card-body">
-        <form id="form_validation" method="POST" enctype="multipart/form-data">
+        <form action="<?=base_url('User/update')?>" id="form_validation" method="POST" enctype="multipart/form-data">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group form-float">
+                        <label>Foto</label>
+                        <div class="row">
+                            <div class="col-4">
+                                <div id="imagePreview">
+                                    <img class="foto-preview" width="150" height="150" src="<?= base_url()?>" />
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <input type="file" class="form-control-file mb-3" id="foto" name="foto">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group form-float">
+                        <label for="">Username</label>
+                        <div class=" form-line">
+                            <input type="text" class="form-control" name="username">
+                        </div>
+                    </div>
+                    <div class="form-group form-float">
+                        <label for="">Password</label>
+                        <div class=" form-line">
+                            <input type="password" class="form-control" name="password">
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="row">
                 <div class="col-sm-6">
                     <div class="form-group form-float">
                         <label for="">Nama</label>
-                        <div class=" form-line ">
-                            <input type="text " class="form-control " name="name " required>
+                        <div class=" form-line">
+                            <input type="text" class="form-control" name="nama">
                         </div>
                     </div>
+                    
                 </div>
-                <div class="col-sm-6 ">
-                    <div class="form-group form-float ">
-                        <label for="">Bidang</label>
+                <div class="col-sm-6">
+                    <div class="form-group form-float">
+                        <label for="">NIP</label>
                         <div class=" form-line">
-                            <input type="text" class="form-control" name="name" required>
+                            <input type="" class="form-control" name="nip">
                         </div>
                     </div>
                 </div>
@@ -32,69 +64,89 @@
             <div class="row">
                 <div class="col-sm-6">
                     <div class="form-group form-float">
-                        <label for="">NIP</label>
-                        <div class=" form-line ">
-                            <input type=" class="form-control" name="name" required>
+                        <label for="">Bidang</label>
+                        <div class=" form-line">
+                            <input type="text" class="form-control" name="bidang">
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-sm-6">
-                <div class="form-group form-float">
-                    <label for="">Jabatan</label>
-                        <div class="form-line">
-                            <input type="text " class="form-control " name="name " required>
+                <div class="col-sm-6">
+                    <div class="form-group form-float">
+                        <label for="">Jabatan</label>
+                        <div class=" form-line">
+                            <input type="text" class="form-control" name="jabatan">
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="row ">
-                <div class="col-sm-6 ">
-                    <div class="form-group form-float ">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group form-float">
                         <label for="">Tempat Lahir</label>
-                    <div class=" form-line">
-                        <input type="text" class="form-control" name="name" required>
+                        <div class=" form-line">
+                            <input type="text" class="form-control" name="tempat_lahir">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group form-float">
+                        <label for="email_address">Tanggal Lahir</label>
+                        <div class="form-line">
+                            <input type="date" class="form-control" name="tgl_lahir">
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col-sm-6">
-                <div class="form-group form-float">
-                    <label for="">Tanggal Lahir</label>
-                    <div class="form-line">
-                        <input type="date" class="form-control" name="surname" required>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group form-float">
+                        <label for="email_address">Email</label>
+                        <div class="form-line">
+                            <input type="email" class="form-control" name="email">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group form-float">
+                        <label for="">Level</label>
+                        <div class=" form-line">
+                        <select class="form-control" style="width: 100%;" name="level">
+                            <option value="Admin">Admin</option>
+                            <option value="User">User</option>
+                        </select>
+                        </div>
                     </div>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group form-float">
+                        <label for="email_address">Jenis Kelamin</label>
+                        <div class="form-group">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="jenis_kelamin" value="Laki-Laki">
+                                <label class="form-check-label">Laki-Laki</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="jenis_kelamin" value="Perempuan">
+                                <label class="form-check-label">Perempuan</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group form-float">
+                        <label class="form-label">Alamat</label>
+                        <div class="form-line">
+                            <textarea name="alamat" cols="30" rows="3" class="form-control no-resize"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="btn btn-primary" type="submit">SUBMIT</button>
+            <a class="btn bg-grey " href="#">CANCEL</a>
+        </form>
     </div>
-    <div class="form-group form-float">
-        <label for="email_address">Email</label>
-        <div class="form-line">
-            <input type="email" class="form-control" name="email" required>
-        </div>
-    </div>
-    <div class="form-group form-float">
-        <label for="email_address">Jenis Kelamin</label>
-        <div class="form-group">
-            <input type="radio" name="gender" id="male" class="with-gap">
-            <label for="male">Laki-Laki</label>
-            <input type="radio" name="gender" id="female" class="with-gap">
-            <label for="female" class="m-l-20">Perempuan</label>
-        </div>
-    </div>
-    <div class="form-group form-float">
-        <label class="form-label">Alamat</label>
-        <div class="form-line">
-            <textarea name="description" cols="30" rows="5" class="form-control no-resize" required></textarea>
-        </div>
-    </div>
-    <div class="form-group form-float">
-        <label>Foto</label>
-        <input type="file" class="form-control-file mb-3" id="foto" name="foto" autocomplete="off" required>
-        <div id="imagePreview"><img class="foto-preview" src="images/default.png')?>" /></div>
-    </div>
-    <button class="btn btn-primary waves-effect" type="submit">SUBMIT</button>
-    <a class="btn bg-grey waves-effect" href="<?= base_url('user') ?>">CANCEL</a>
-    </form>
-</div>
 </div>
 <!--END Form User-->
 

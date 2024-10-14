@@ -3,6 +3,7 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Models\SuratM;
+use CodeIgniter\HTTP\Request;
 
 class Surat extends BaseController
 {
@@ -19,29 +20,72 @@ class Surat extends BaseController
         return view('tbl_surat',$data);
     }
 
+    public function tes()
+    {
+        $surat = new SuratM();
+        $data = [
+            'kat1'=>$surat->AllKat1(),
+            'kat2'=>$surat->AllKat2(),
+            'bulan' =>$surat->getMonth(),
+            'tahun'=>$surat->getYear(),
+            'surat'=>$surat->getSurat()
+        ];
+        return view('tes',$data);
+    }
 
-    
     public function search()
     {
         $surat = new SuratM();
+        $data = [
+            'kat1'=>$surat->AllKat1(),
+            'kat2'=>$surat->AllKat2(),
+            'bulan' =>$surat->getMonth(),
+            'tahun'=>$surat->getYear(),
+            'surat'=>$surat->getSurat()
+        ];
+        return view('search_surat_filter',$data);
+    }
+
+    public function searchx(Request $request)
+    {
+        $surat = new SuratM();
+        /*
         $data = [
             'title'=> 'Search Surat',
             'title2'=> 'Search Surat',
             'kat1'=>$surat->AllKat1(),
             'kat2'=>$surat->AllKat2(),
             'surat'=>$surat->getSurat()
-        ];
-        /*
-        if(!empty($_POST['sel_kat1'])){
-            $this->db->table('tb_surat_masuk')->where('tb_surat_masuk',$_POST['sel_kat1']);
-        }
-        if(!empty($_POST['sel_kat2'])){
-            $this->db->where('tb_surat_masuk',$_POST['sel_kat2']);
-        }
-        $result=$this->db->get('tb_surat_masuk')->result();
-        */
-        return view('search_surat',$data);
+        ];*/
+        return view('search_surat',/*$data*/);
     }
+
+  /*  public function getdata()
+    {
+        $surat = new SuratM();
+        $result = $surat->getSurat();
+        $data = array();
+        $i=0;
+        foreach($result as $val){
+            $data[] = array(
+                $i,
+                $val->surat_dari,
+                $val->tgl_surat,
+                $val->no_surat,
+                $val->tgl_diterima,
+                $val->kat1,
+                $val->kat2,
+            );
+            $i++;
+        }
+        $output = array(
+            "data"=>$data
+        );
+
+        echo json_encode($output);
+        return view('search_surat');
+    }*/
+
 
     public function add(){
         $surat = new SuratM();
@@ -77,13 +121,17 @@ class Surat extends BaseController
         $fileName = $file->getClientName();
         $file->move('uploads/',$fileName);
        }
-       /*
-       $array_te = $this->request->getPost('terusan');
-       $terusan['terusan'] = implode(',',$array_te);
+       
+       $cekter = $this->request->getPost('checkter');
+       $arrayter = $this->request->getPost('terusan');
+       $ter=array_intersect_key($arrayter,$cekter);
+       $terusan = implode(',',$ter);
        //print($terusan);
-       $array_ti = $this->request->getPost('tindakan');
-       $tindakan['tindakan'] = implode(',',$array_ti);
-       //print($tindakan);*/
+       $cekti = $this->request->getPost('checktin');
+       $arrayti = $this->request->getPost('tindakan');
+       $ti=array_intersect_key($arrayti,$cekti);
+       $tindakan = implode(',',$ti);
+       //print($tindakan);
        $data = [
         'surat_dari' => $this->request->getPost('surat_dari'),
         'tgl_surat' => $this->request->getPost('tgl_surat'), 
@@ -94,8 +142,8 @@ class Surat extends BaseController
         'id_kat1' => $this->request->getPost('kat1'),
         'id_kat2' => $this->request->getPost('kat2'),
         'perihal' => $this->request->getPost('perihal'),
-        'terusan' => $this->request->getPost('terusan'),
-        'tindakan' => $this->request->getPost('tindakan'),
+        'terusan' => $terusan,
+        'tindakan' => $tindakan,
         'catatan'=> $this->request->getPost( 'catatan'),
         'file' => $fileName,
        ];
@@ -115,13 +163,12 @@ class Surat extends BaseController
             $fileName = $file->getClientName();
             $file->move('uploads/',$fileName);
         }
-        /*
         $array_te = $this->request->getPost('terusan');
         $terusan['terusan'] = implode(',',$array_te);
         //print($terusan);
         $array_ti = $this->request->getPost('tindakan');
         $tindakan['tindakan'] = implode(',',$array_ti);
-        //print($tindakan);*/
+        //print($tindakan);
         $data = [
             'id_surat' => $id_surat,
             'surat_dari' => $this->request->getPost('surat_dari'),
@@ -133,8 +180,8 @@ class Surat extends BaseController
             'id_kat1' => $this->request->getPost('kat1'),
             'id_kat2' => $this->request->getPost('kat2'),
             'perihal' => $this->request->getPost('perihal'),
-            'terusan' => $this->request->getPost('terusan'),
-            'tindakan' => $this->request->getPost('tindakan'),
+            'terusan' => $terusan,
+            'tindakan' => $tindakan,
             'catatan'=> $this->request->getPost( 'catatan'),
             'file' => $fileName,
         ];

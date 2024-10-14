@@ -10,8 +10,6 @@ class SuratM extends Model {
 
     public function getSurat(){
         return $this->db->table('tb_surat_masuk')
-        ->join('tb_kat1','tb_kat1.id_kat1=tb_surat_masuk.id_kat1')
-        ->join('tb_kat2','tb_kat2.id_kat2=tb_surat_masuk.id_kat2')
         ->get()->getResultArray();
     }
 
@@ -23,6 +21,18 @@ class SuratM extends Model {
     public function AllKat2(){
         return $this->db->table('tb_kat2')
         ->get()->getResultArray();
+    }
+
+    public function getMonth(){
+        return $this->db->table('tb_surat_masuk')
+        ->select('month(tgl_surat) as bulan')
+        ->distinct()->get()->getResultArray();
+    }
+
+    public function getYear(){
+        return $this->db->table('tb_surat_masuk')
+        ->select('year(tgl_surat) as tahun')
+        ->distinct()->get()->getResultArray();
     }
 
     

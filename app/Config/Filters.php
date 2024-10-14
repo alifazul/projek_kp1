@@ -2,6 +2,7 @@
 
 namespace Config;
 
+use App\Filters\AuthFilters;
 use CodeIgniter\Config\Filters as BaseFilters;
 use CodeIgniter\Filters\Cors;
 use CodeIgniter\Filters\CSRF;
@@ -12,6 +13,8 @@ use CodeIgniter\Filters\InvalidChars;
 use CodeIgniter\Filters\PageCache;
 use CodeIgniter\Filters\PerformanceMetrics;
 use CodeIgniter\Filters\SecureHeaders;
+use App\Filters\FilterUser;
+use App\Filters\FilterAdmin;
 
 class Filters extends BaseFilters
 {
@@ -34,6 +37,8 @@ class Filters extends BaseFilters
         'forcehttps'    => ForceHTTPS::class,
         'pagecache'     => PageCache::class,
         'performance'   => PerformanceMetrics::class,
+        'authfilter'   => AuthFilters::class,
+        //'filteruser'   => FilterUser::class,
     ];
 
     /**
@@ -51,13 +56,16 @@ class Filters extends BaseFilters
      */
     public array $required = [
         'before' => [
-            'forcehttps', // Force Global Secure Requests
-            'pagecache',  // Web Page Caching
+            //'forcehttps', // Force Global Secure Requests
+            //'pagecache',  // Web Page Caching
+           
+
         ],
         'after' => [
-            'pagecache',   // Web Page Caching
-            'performance', // Performance Metrics
-            'toolbar',     // Debug Toolbar
+            //'pagecache',   // Web Page Caching
+            //'performance', // Performance Metrics
+            //'toolbar',     // Debug Toolbar
+
         ],
     ];
 
@@ -72,10 +80,27 @@ class Filters extends BaseFilters
             // 'honeypot',
             // 'csrf',
             // 'invalidchars',
+            'authfilter' => [ 'except' => [
+                'auth','auth/*',
+                '/','auth/*'
+            ]],
+            /*'filteruser' => [ 'except' => [
+                'auth','auth/*',
+            ]],*/
         ],
         'after' => [
             // 'honeypot',
             // 'secureheaders',
+            'authfilter' => [ 'except' => [
+                'home','home/*',
+                'surat','surat/*',
+                'user','user/*',
+                '/','auth/*'
+            ]],
+            /*'filteruser' => [ 'except' => [
+                'home','home/*',
+                'surat','surat/*',
+            ]],*/
         ],
     ];
 

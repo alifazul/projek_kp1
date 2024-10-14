@@ -30,6 +30,7 @@
             <a href="<?= base_url('Surat') ?>" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
         </div>
     </div>
+    <?php if (session()->get('level')=='Admin') { ?>
     <div class="col-lg-3 col-6">
         <!-- small box -->
         <div class="small-box bg-warning">
@@ -43,7 +44,7 @@
             <a href="<?= base_url('user') ?>" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
         </div>
     </div>
-
+    <?php } ?>
 </div>
 <!-- /.row -->
 <!-- Main row -->

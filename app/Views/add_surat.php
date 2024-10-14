@@ -44,8 +44,6 @@
                             <input type="text" class="form-control" name="no_agenda" required>
                         </div>
                     </div>
-                    <input type="text" class="form-control" name="terusan" required>
-                    <input type="text" class="form-control" name="tindakan" required>
                     <div class="form-group form-float">
                         <label for="email_address">Sifat</label>
                         <div class="form-group">
@@ -97,38 +95,44 @@
                     <textarea name="perihal" cols="30" rows="5" class="form-control no-resize" required></textarea>
                 </div>
             </div>
-            <!--
+            
             <div class="row">
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label for="xxx">Diteruskan kepada</label>
                        
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="terusan[]" value="1">
-                            <label class="form-check-label">Checkbox</label>
+                            <input class="form-check-input" type="checkbox" name="checkter[0]" value='0'>
+                            <input type="text" class="form-control" name="terusan[0]">
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="terusan[]" value="2">
-                            <label class="form-check-label">Checkbox</label>
+                            <input class="form-check-input" type="checkbox" name="checkter[1]" value='1'>
+                            <input type="text" class="form-control" name="terusan[1]">
                         </div>
-                        
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="checkter[2]" value='2'>
+                            <input type="text" class="form-control" name="terusan[2]">
+                        </div>  
                     </div>
                 </div>
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label for="basic_checkbox">Dengan hormat harap</label>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox"  name="tindakan[]" value="1">
-                            <label class="form-check-label">Checkbox</label>
+                            <input class="form-check-input" type="checkbox"  name="checktin[0]" value='0'>
+                            <input type="text" class="form-control" name="tindakan[0]">
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="tindakan[]"  value="2">
-                            <label class="form-check-label">Checkbox</label>
+                            <input class="form-check-input" type="checkbox"  name="checktin[1]" value='1'>
+                            <input type="text" class="form-control" name="tindakan[1]">
                         </div>
-                        
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox"  name="checktin[2]" value='2'>
+                            <input type="text" class="form-control" name="tindakan[2]">
+                        </div>
                     </div>
                 </div>
-            </div> -->
+            </div>
             <div class="form-group form-float">
                 <label class="form-label">Catatan</label>
                 <div class="form-line">

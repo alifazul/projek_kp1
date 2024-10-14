@@ -14,6 +14,8 @@ class UserM extends Model {
         ->get()->getResultArray();
     }
 
+
+
    // detail
    public function detail($id_user)
    {

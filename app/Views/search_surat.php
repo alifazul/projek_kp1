@@ -1,126 +1,122 @@
-<?= $this->extend('tem_x')?>
+<!DOCTYPE html>
+<html lang="en">
 
-<?= $this->section('content')?>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title><?= (!empty($title) ? $title : 'No Title') ?></title>
 
-<div class="card card-default">
-    <div class="card-body">
-        <div class="row">
-            <div class="col-3">
-                <div class="form-group">
-                    <label>Kategori 1</label>
-                    <div id="search1"></div>
-                    <!--
-                    <select id="sel_kat1" class="select" multiple="multiple" data-placeholder="Any" style="width: 100%;">
-                    <?php /* foreach($kat1 as $key => $value) { ?>
-                                <option value="<?php echo $value['id_kat1'] ?>">
-                                    <?php echo $value['kat1'] ?>
-                                </option>
-                    <?php } */?>
-                </select>-->
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href = "<?=base_url('plugins/fontawesome-free/css/all.min.css')?>">
+      <!-- icheck bootstrap -->
+    <link rel="stylesheet" href="<?=base_url()?>plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="<?=base_url('dist/css/adminlte.css') ?>">
+
+     <!-- Sweetalert2 -->
+     <link rel="stylesheet" href = "<?=base_url('plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css') ?>">
+    
+</head>
+
+<body class="hold-transition layout-top-nav">
+
+    <div class="content-wrapper">
+        <!-- Navbar -->
+        <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+            <!-- Left navbar links -->
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a href="index3.html" class="nav-link">Home</a>
+                </li>
+            </ul>
+
+            <!-- Right navbar links -->
+            <ul class="navbar-nav ml-auto">
+
+                <!-- Messages Dropdown Menu -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img class="img-profile rounded-circle" src="dist/img/user1-128x128.jpg">
+                        <span class="mr-2 d-none d-lg-inline small">Douglas McGee</span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
+                        <a class="dropdown-item" href="#">
+                            <i class="fas fa-user"></i> Profile
+                        </a>
+                        <a class="dropdown-item" href="#">
+                            <i class="fas fa-cogs"></i> Settings
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+
+            <!-- Content Header (Page header) -->
+            <div class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                        </div>
+                    </div>
+                    <!-- /.row -->
                 </div>
+                <!-- /.container-fluid -->
             </div>
-            <div class="col-3">
-                <div class="form-group">
-                    <label>Kategori 2</label>
-                    <div id="search2"></div>
-                    <!--
-                    <select id="sel_kat2" class="select2" data-placeholder="Any" style="width: 100%;">
-                    <?php /* foreach($kat2 as $key => $value) { ?>
-                                <option value="<?php echo $value['id_kat2'] ?>">
-                                    <?php echo $value['kat2'] ?>
-                                </option>
-                    <?php } */?>
-                </select>-->
+            <!-- /.content-header -->
+
+            <!-- Main content -->
+            <section class="content">
+                <div class="container">
+                    <div class="card mt-3 align-item-center mr-auto ml-auto">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-auto"> 
+                                    <img class="rounded" src="<?= base_url('')?>dist/img/dokumen.jpg" alt="User Image" width="100" height="120">
+                                </div>
+                                <div class="col">
+                                    <h4>Surat Dari</h4>
+                                    <p class="text-muted"><i class="fas fa-tag"></i>&nbsp; xxx,xxx &nbsp; &nbsp; <i class="fas fa-calendar-day"></i> &nbsp; xxx</p>
+                                    <div class="xx clearfix">
+                                        <a class="btn btn-info float-right mr-2"><i class="fas fa-eye"></i>&nbsp; Lihat</a> 
+                                        <a class="btn btn-success float-right mr-2"><i class="fas fa-download"></i>&nbsp; Unduh</a>
+                                    </div>
+                                </div>
+                            </div> 
+                        </div> 
+                    </div>
+                        
                 </div>
-            </div>
-            <div class="col-3">
-                <div class="form-group">
-                    <label>Sort Order:</label>
-                    <select class="select" style="width: 100%;">
-                        <option selected>ASC</option>
-                        <option>DESC</option>
-                    </select>
-                </div>
-            </div>
-            <div class="col-3">
-                <div class="form-group">
-                    <label>Order By:</label>
-                    <select class="select" style="width: 100%;">
-                        <option selected>Title</option>
-                        <option>Date</option>
-                    </select>
-                </div>
-            </div>
-        </div>
+            </section>
+        
     </div>
-</div>
-<!--Tabel Surat-->
-<div class="card">
-    <div class="card-header">
-        <h3 class="card-title">DataTable with default features</h3>
-    </div>
-    <div class="card-body">
-        <table id="example1" class="table table-bordered table-striped">
-        <thead>
-                <tr>
-                    <th>No</th>
-                    <th>Surat Dari</th>
-                    <th>Tanggal Surat</th>
-                    <th>No Surat</th>
-                    <th>Tanggal Diterima</th>
-                    <th>Kat 1</th>
-                    <th>Kat 2</th>
-                    <th>File</th>
-                    <th>Aksi</th>
-                </tr>
-            </thead>
-            <tfoot>
-                <tr>
-                    <th>No</th>
-                    <th>Surat Dari</th>
-                    <th>Tanggal Surat</th>
-                    <th>No Surat</th>
-                    <th>Tanggal Diterima</th>
-                    <th>Tindakan</th>
-                    <th>Keterangan</th>
-                    <th>File</th>
-                    <th>Aksi</th>
-                </tr>
-            </tfoot>
-            <tbody>
-                <?php $no=1; foreach($surat as $row) { 
-                    $id_surat = $row['id_surat'];
-                ?>
-                <tr>
-                    <td><?= $no ?></td>
-                    <td><?= $row['surat_dari'] ?></td>
-                    <td><?= $row['tgl_surat'] ?></td>
-                    <td><?= $row['no_surat'] ?></td>
-                    <td><?= $row['tgl_surat'] ?></td>
-                    <td><?= $row['kat1'] ?></td>
-                    <td><?= $row['kat2'] ?></td>
-                    <td><?= $row['file'] ?></td>
-                    <td>
-                        <a class="btn btn-default btn-sm" href="<?= base_url('Surat/detail/'.$row['id_surat']) ?>">
-                            <i class="far fa-eye"></i>
-                        </a>
-                        <a class="btn btn-warning btn-sm" href="<?= base_url('Surat/edit/'.$row['id_surat']) ?>">
-                            <i class="far fa-edit"></i>  
-                        </a>
-                        <a class="btn btn-success btn-sm" href="#">
-                            <i class="fas fa-download"></i>
-                        </a>
-                        <a class="btn btn-danger btn-sm hapus_notif" href="<?= base_url('Surat/delete/'.$row['id_surat']) ?>">
-                            <i class="far fa-trash-alt"></i>  
-                        </a>
-                    </td>
-                </tr>
-                <?php $no++; } ?>
-            </tbody>
-        </table>
 
-    </div>
-</div>
-<!--END Tabel Surat-->
+    
+    <script src="<?=base_url()?>plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="<?=base_url()?>plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="<?=base_url()?>dist/js/adminlte.min.js"></script>
 
-<?= $this->endSection()?>
+    <!-- Sweetalert2 -->
+    <script src = "<?= base_url('plugins/sweetalert2/sweetalert2.min.js')?>"></script>
+
+    <script>
+        const swal = $('.swal').data('swal');
+            if(swal){
+                Swal.fire({
+                    title: "Gagal!",
+                    text: swal,
+                    icon: "error",
+                    timer: 2000
+                });
+            }
+    </script>
+</body>
+</html>

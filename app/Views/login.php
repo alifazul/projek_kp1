@@ -15,11 +15,15 @@
     <link rel="stylesheet" href="<?=base_url()?>plugins/icheck-bootstrap/icheck-bootstrap.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="<?=base_url('dist/css/adminlte.css') ?>">
+
+     <!-- Sweetalert2 -->
+     <link rel="stylesheet" href = "<?=base_url('plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css') ?>">
     
 </head>
 
 <body class="hold-transition login-page">
 
+    <div class="swal" data-swal="<?= session('success')?>"></div>
     <div class="login-box">
         <div class="login-logo">
             <p><b>Login</b></p>
@@ -38,7 +42,7 @@
                         </ul>
                     </div>
                 <?php endif ?>
-                <?php echo form_open('Auth/save_login'); ?>
+                <?php echo form_open('Auth/cek_login'); ?>
                     <div class="input-group mb-3">
                         <input type="text" class="form-control" placeholder="Username" name="username">
                         <div class="input-group-append">
@@ -74,5 +78,20 @@
 <script src="<?=base_url()?>plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
 <script src="<?=base_url()?>dist/js/adminlte.min.js"></script>
+
+<!-- Sweetalert2 -->
+<script src = "<?= base_url('plugins/sweetalert2/sweetalert2.min.js')?>"></script>
+
+<script>
+    const swal = $('.swal').data('swal');
+        if(swal){
+            Swal.fire({
+                title: "Gagal!",
+                text: swal,
+                icon: "error",
+                timer: 2000
+            });
+        }
+</script>
 </body>
 </html>
