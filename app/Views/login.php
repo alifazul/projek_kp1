@@ -1,48 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
+<?= $this->extend('_template')?>
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title><?php if($title) echo $title ?></title>
-
-    <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href = "<?=base_url('plugins/fontawesome-free/css/all.min.css')?>">
-      <!-- icheck bootstrap -->
-    <link rel="stylesheet" href="<?=base_url()?>plugins/icheck-bootstrap/icheck-bootstrap.min.css">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="<?=base_url('dist/css/adminlte.css') ?>">
-
-     <!-- Sweetalert2 -->
-     <link rel="stylesheet" href = "<?=base_url('plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css') ?>">
-    
-</head>
-
-<body class="hold-transition login-page">
-
-    <div class="swal" data-swal="<?= session('success')?>"></div>
-    <div class="login-box">
+<?= $this->section('content')?>
+    <div class="mx-auto login-box">
         <div class="login-logo">
             <p><b>Login</b></p>
         </div>
         <!-- /.login-logo -->
         <div class="card">
             <div class="card-body login-card-body">
-                <p class="login-box-msg">Sign in to start your session</p>
-                <?php $errors = session()->getFlashdata('errors'); ?>
-                <?php if (! empty($errors)): ?>
-                    <div class="alert alert-danger" role="alert">
-                        <ul>
-                        <?php foreach ($errors as $error): ?>
-                            <li><?= esc($error) ?></li>
-                        <?php endforeach ?>
-                        </ul>
-                    </div>
-                <?php endif ?>
-                <?php echo form_open('Auth/cek_login'); ?>
+                <p class="login-box-msg">Login untuk masuk</p>
+               <form id="login-validation" action="<?=base_url('auth/login')?>" method="post" name="login">
                     <div class="input-group mb-3">
                         <input type="text" class="form-control" placeholder="Username" name="username">
                         <div class="input-group-append">
@@ -66,32 +33,39 @@
                         </div>
                         <!-- /.col -->
                     </div>
-                <?php echo form_close(); ?>
+               </form>
             </div>
             <!-- /.login-card-body -->
         </div>
     </div>
+<?= $this->endSection()?>
 
-    <!-- jQuery -->
-<script src="<?=base_url()?>plugins/jquery/jquery.min.js"></script>
-<!-- Bootstrap 4 -->
-<script src="<?=base_url()?>plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- AdminLTE App -->
-<script src="<?=base_url()?>dist/js/adminlte.min.js"></script>
-
-<!-- Sweetalert2 -->
-<script src = "<?= base_url('plugins/sweetalert2/sweetalert2.min.js')?>"></script>
-
-<script>
-    const swal = $('.swal').data('swal');
-        if(swal){
-            Swal.fire({
-                title: "Gagal!",
-                text: swal,
-                icon: "error",
-                timer: 2000
+<?= $this->section('js_custom')?>
+    <script>
+         $('#login-validation').validate({
+                rules: {
+                    username: {
+                        required: true,
+                    },
+                    password: {
+                        required: true,
+                    },
+                },
+                messages: {
+                    username: "Username harus diisi",
+                    password: "Password harus diisi",
+                },
+                errorElement: 'span',
+                errorPlacement: function(error, element) {
+                    error.addClass('invalid-feedback');
+                    element.closest('.input-group').append(error);
+                },
+                highlight: function(element, errorClass, validClass) {
+                    $(element).addClass('is-invalid');
+                },
+                unhighlight: function(element, errorClass, validClass) {
+                    $(element).removeClass('is-invalid');
+                }
             });
-        }
-</script>
-</body>
-</html>
+    </script>
+<?= $this->endSection()?>

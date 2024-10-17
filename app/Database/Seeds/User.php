@@ -29,7 +29,7 @@ class User extends Seeder
             $level = "{Admin|User}";
             $level_spin = preg_replace_callback("/\{([^}]+)\}/", $replacement, $level); 
             $data[] = [
-                'foto' => 'avatar'.rand(2,5).'png',
+                'foto' => 'avatar'.rand(2,5).'.png',
                 'username' => $username_spin,
                 'password' => password_hash(1234, PASSWORD_DEFAULT),
                 'nama' => $nama_spin,

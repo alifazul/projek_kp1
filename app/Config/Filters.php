@@ -82,7 +82,8 @@ class Filters extends BaseFilters
             // 'invalidchars',
             'authfilter' => [ 'except' => [
                 'auth','auth/*',
-                '/','auth/*'
+                '/','home/*',
+                'home','home/*'
             ]],
             /*'filteruser' => [ 'except' => [
                 'auth','auth/*',
@@ -93,9 +94,16 @@ class Filters extends BaseFilters
             // 'secureheaders',
             'authfilter' => [ 'except' => [
                 'home','home/*',
+                'dashboard','dashboard/*',
                 'surat','surat/*',
+                'sk','sk/*',
+                'sm','sm/*',
                 'user','user/*',
-                '/','auth/*'
+                '/','home/*',
+                'home','home/*',
+                'auth','auth/*',
+                'kat','kat/*',
+                'profil','profil/*',
             ]],
             /*'filteruser' => [ 'except' => [
                 'home','home/*',

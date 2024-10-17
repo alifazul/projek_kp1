@@ -10,20 +10,18 @@ class UserM extends Model {
     protected $allowedFields = [];
 
     public function getUser(){
-        return $this->db->table('tb_user')
-        ->get()->getResultArray();
+        $builder = $this->select('*');
+        return $builder;
     }
 
-
-
-   // detail
-   public function detail($id_user)
-   {
-       return $this->db->table('tb_user')
-       ->select('tb_user.*')
-       ->where('tb_user.id_user',$id_user)
-       ->Get()->getRowArray();
-   }
+    // detail
+    public function detail($id_user)
+    {
+        return $this->db->table('tb_user')
+        ->select('*')
+        ->where('id_user',$id_user)
+        ->get()->getRow();
+    }
 
     // tambah
     public function tambah($data)
