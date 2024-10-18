@@ -21,6 +21,7 @@
                     <th>Username</th>
                     <th>Nama</th>
                     <th>Level</th>
+                    <th>Status</th>
                 </tr>
             </thead>
             <tfoot>
@@ -30,6 +31,7 @@
                     <th>Username</th>
                     <th>Nama</th>
                     <th>Level</th>
+                    <th>Status</th>
                 </tr>
             </tfoot>
             <tbody>
@@ -38,14 +40,16 @@
                 <tr>
                     <td><?= $no ?></td>
                     <td>
-                        <a class="btn btn-warning btn-sm" href="<?= base_url('User/edit/'.$row['id_user']) ?>">
+                        <a class="btn btn-warning btn-sm" href="<?= base_url('user/edit/'.$row['id_user']) ?>">
                             <i class="far fa-edit"></i>  
                         </a>
-                        <a class="btn btn-success btn-sm " href="<?= base_url('user/edit/'.$row['id_user']) ?>">
+                        <a class="btn btn-success btn-sm " href="<?= base_url('user/reset_password/'.$row['id_user']) ?>">
                             <i class="fas fa-sync-alt"></i>
                         </a>
-                        <a class="btn bg-black btn-sm" href="<?= base_url('user/edit/'.$row['id_user']) ?>">
-                            <i class="fas fa-lock"></i> <i class="fas fa-lock-open"></i>
+                        <a class="btn bg-black btn-sm" href="<?= base_url('user/edit_status/'.$row['id_user']) ?>">
+                            <?php if($row['status']=='aktif') { ?><i class="fas fa-lock"></i>
+                            <?php }elseif($row['status']=='nonaktif') {?><i class="fas fa-lock-open"></i>
+                            <?php } ?>
                         </a>
                         <a id="hapus_data" class="btn btn-danger btn-sm" href="<?= base_url('user/delete/'.$row['id_user']) ?>">
                             <i class="far fa-trash-alt"></i>  
@@ -54,6 +58,10 @@
                     <td><?= $row['username'] ?></td>
                     <td><?= $row['nama'] ?></td>
                     <td><?= $row['level'] ?></td>
+                    <td><?php if($row['status']=='aktif') { ?><span class="badge bg-success"><?=$row['status']?></span>
+                        <?php }elseif($row['status']=='nonaktif') {?> <span class="badge bg-red"><?=$row['status']?></span>
+                        <?php } ?>
+                    </td>
                 </tr>
                 <?php $no++; } ?>
             </tbody>

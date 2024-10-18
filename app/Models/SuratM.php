@@ -15,6 +15,30 @@ class SuratM extends Model {
         return $builder;
     }
 
+    public function getSuratAll()
+    {
+        $builder = $this->getSurat()->findAll();
+        return $builder;
+    }
+
+    public function getSuratIDUser($id_user)
+    {
+        $builder = $this->getSurat()->where('tb_surat.id_user',$id_user);
+        return $builder;
+    }
+
+    public function getSuratKat1($kat1)
+    {
+        $builder = $this->getSurat()->where('tb_surat.kat1',$kat1)->countAllResults();
+        return $builder;
+    }
+
+    public function getSuratKat2($kat2)
+    {
+        $builder = $this->getSurat()->where('tb_surat.kat2',$kat2)->countAllResults();
+        return $builder;
+    }
+
     function fetch_data(/*$limit, $start,*/$ket=null, $kat1=null, $kat2=null, $cari=null, $bulan=null, $tahun=null,$sort=null)
     {
         $builder = $this->select('*');
@@ -48,62 +72,7 @@ class SuratM extends Model {
         }elseif (isset($sort) == 'oldest') {
             $builder->orderBy('id_surat','ASC');
         }
-
         $surats = $builder;
-       
-        /*
-        if($numrow > 0)
-        {
-        foreach($query->getResultArray() as $mail)
-        {
-            $output .= '
-            <div class="card mt-3 align-item-center mr-auto ml-auto">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-auto"> 
-                                <img class="rounded" src="'.base_url('').'dist/img/dokumen.jpg" alt="User Image" width="100" height="120">
-                            </div>
-                            <div class="col">
-                                <h4>'.$mail['surat'].'</h4>
-                                <p class="text-muted"><i class="fas fa-tag"></i>&nbsp; '.$mail['kat1'].','.$mail['kat2'].' &nbsp; &nbsp; <i class="fas fa-calendar-day"></i> &nbsp; '.$mail['tgl_surat'].'</p>
-                                <div class="xx clearfix">
-                                    <a class="btn btn-info float-right mr-2" href="#"><i class="fas fa-eye"></i>&nbsp; Lihat</a> 
-                                    <a class="btn btn-success float-right mr-2"><i class="fas fa-download"></i>&nbsp; Unduh</a>
-                                </div>
-                            </div>
-                        </div> 
-                    </div> 
-                </div>
-            ';
-        }
-        }
-        else
-        {
-            $output = '<h3>Data Tidak Ditemukan</h3>';
-        }
-        $data = [];
-        foreach ($surats as $surat) {
-
-            // if file as url
-            $file = (filter_var($surat['file'], FILTER_VALIDATE_URL)) ? $surat['file'] : base_url('uploads/'.$surat['file']);
-
-            $data[] = array(
-                'id_surat' => $surat['id_surat'],
-                'surat' => $surat['surat'],
-                'tgl_surat' => $surat['tgl_surat'],
-                'no_surat' => $surat['no_surat'],
-                'tgl_terima' => $surat['tgl_terima'],
-                'no_agenda' => $surat['no_agenda'],
-                'sifat' => $surat['sifat'],
-                'perihal' => $surat['perihal'],
-                'terusan' => $surat['terusan'],
-                'tindakan' => $surat['tindakan'],
-                'catatan' => $surat['catatan'],
-                'kat1' => $surat['kat1'],
-                'kat2' => $surat['kat2'],
-                'file' => $file,
-                );
-        }*/
         return $surats;
     }
 
@@ -162,6 +131,7 @@ class SuratM extends Model {
         $builder = $this->db->table('tb_surat');
         $builder->insert($data);
     }
+
 
     // edit
     public function edit($data)

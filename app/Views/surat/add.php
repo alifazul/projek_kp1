@@ -103,7 +103,7 @@
                             </div>
                             <input type="text" class="form-control" name="terusan[0]">
                         </div>
-                        <div class="input-group">
+                        <div class="input-group mt-1">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">
                                     <input type="checkbox" name="checkter[1]" value='1'>
@@ -111,13 +111,16 @@
                             </div>
                             <input type="text" class="form-control" name="terusan[1]">
                         </div>
-                        <div class="input-group">
+                        <div class="input-group mt-1">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">
                                     <input type="checkbox" name="checkter[2]" value='2'>
                                 </span>
                             </div>
                             <input type="text" class="form-control" name="terusan[2]">
+                        </div>
+                        <div class="form-line mt-1">
+                            <textarea name="ket_terusan" cols="30" rows="2" class="form-control no-resize"></textarea>
                         </div>
                     </div>
                 </div>
@@ -132,7 +135,7 @@
                             </div>
                             <input type="text" class="form-control" name="tindakan[0]">
                         </div>
-                        <div class="input-group">
+                        <div class="input-group mt-1">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">
                                     <input type="checkbox" name="checktin[1]" value='1'>
@@ -140,13 +143,16 @@
                             </div>
                             <input type="text" class="form-control" name="tindakan[1]">
                         </div>
-                        <div class="input-group">
+                        <div class="input-group mt-1">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">
                                     <input type="checkbox" name="checktin[2]" value='2'>
                                 </span>
                             </div>
                             <input type="text" class="form-control" name="tindakan[2]">
+                        </div>
+                        <div class="form-line mt-1">
+                            <textarea name="ket_tindakan" cols="30" rows="2" class="form-control no-resize"></textarea>
                         </div>
                     </div>
                 </div>

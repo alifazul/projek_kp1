@@ -93,16 +93,13 @@ class Filters extends BaseFilters
             // 'honeypot',
             // 'secureheaders',
             'authfilter' => [ 'except' => [
-                'home','home/*',
                 'dashboard','dashboard/*',
                 'surat','surat/*',
-                'sk','sk/*',
-                'sm','sm/*',
                 'user','user/*',
                 '/','home/*',
                 'home','home/*',
                 'auth','auth/*',
-                'kat','kat/*',
+                'kategori','kategori/*',
                 'profil','profil/*',
             ]],
             /*'filteruser' => [ 'except' => [

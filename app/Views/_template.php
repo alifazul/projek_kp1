@@ -66,7 +66,7 @@
                     title: "Peringatan!",
                     text: swalw,
                     icon: "warning",
-                    timer: 1000
+                    timer: 2000
                 });
         }
         const logout =   $('.logout').on('click', function(){
@@ -87,7 +87,24 @@
             })
             return false;
         });
-
+        const hapus = $('#hapus').on('click', function(){
+            var getLink = $(this).attr('href');
+                Swal.fire({
+                    title: "Yakin hapus data?",            
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    confirmButtonText: 'Ya',
+                    cancelButtonColor: '#3085d6',
+                    cancelButtonText: "Batal"
+                }).then(result => {
+                    //jika klik ya maka arahkan ke proses.php
+                    if(result.isConfirmed){
+                        window.location.href = getLink
+                    }
+                })
+            return false;
+            });
      
 
         $(function() {

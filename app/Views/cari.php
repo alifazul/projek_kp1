@@ -93,13 +93,12 @@
                                             <option value="" selected>
                                                 Semua
                                             </option>
-                                            <?php 
-                                            foreach ($bulan as $filter): ?>
-                                            <option value="<?php
-                                                if($filter<10) { echo '-0'.$filter.'-'; }
-                                                else { echo $filter;} ?>">
-                                                <?= $filter  ?>
-                                            </option>
+                                            <?php sort($bulan); foreach ($bulan as $filter): ?>
+                                                <option value="<?php
+                                                    if($filter<10) { echo '-0'.$filter.'-'; }
+                                                    else { echo $filter;} ?>">
+                                                    <?= $filter  ?>
+                                                </option>
                                             <?php endforeach ?>
                                         </select>
                                     </div>
@@ -113,12 +112,10 @@
                                             <option value="" selected>
                                                 Semua
                                             </option>
-                                            <?php 
-                                            sort($tahun);
-                                            foreach ($tahun as $filter): ?>
-                                            <option value="<?= $filter ?>">
-                                                <?= $filter  ?>
-                                            </option>
+                                            <?php sort($tahun);foreach ($tahun as $filter): ?>
+                                                <option value="<?= $filter ?>">
+                                                    <?= $filter  ?>
+                                                </option>
                                             <?php endforeach ?>
                                         </select>
                                     </div>
@@ -132,6 +129,7 @@
                     
                 </div>
             </section>
+
 <?= $this->endSection()?>
 
 <?= $this->section('js_custom')?>

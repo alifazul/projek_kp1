@@ -18,7 +18,7 @@
                                 <div class="form-group form-float">
                                     <label for="">Username</label>
                                     <div class=" form-line">
-                                        <input type="text" class="form-control" name="username" value="<?= $user->username ?>" disabled>
+                                        <input type="text" class="form-control" name="username" value="<?= $user->username ?>" readonly>
                                     </div>
                                 </div>
                             </div>
@@ -26,7 +26,7 @@
                                 <div class="form-group form-float">
                                     <label for="">Password</label>
                                     <div class=" form-line">
-                                        <input type="password" class="form-control" name="password" value="" disabled>
+                                        <input type="password" class="form-control" name="password" value="" readonly>
                                     </div>
                                 </div>
 
@@ -63,7 +63,7 @@
                                 <div class="form-group form-float">
                                     <label for="">Nama</label>
                                     <div class=" form-line">
-                                        <input type="text" class="form-control" name="nama" value="<?= $user->nama?>" disabled>
+                                        <input type="text" class="form-control" name="nama" value="<?= $user->nama?>" readonly>
                                     </div>
                                 </div>
                             </div>

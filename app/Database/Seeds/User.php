@@ -15,7 +15,7 @@ class User extends Seeder
 
         // build random data
         $data = [];
-        for ($i=0; $i < 20 ; $i++) { 
+        for ($i=1; $i <= 20 ; $i++) { 
             $nama = "{roma|nita|zahra|redo}";
             $nama_spin = preg_replace_callback("/\{([^}]+)\}/", $replacement, $nama);
             $username_spin = $nama_spin.$i;
@@ -28,8 +28,10 @@ class User extends Seeder
             $jabatan_spin = preg_replace_callback("/\{([^}]+)\}/", $replacement, $jabatan); 
             $level = "{Admin|User}";
             $level_spin = preg_replace_callback("/\{([^}]+)\}/", $replacement, $level); 
+            $status = "{aktif|nonaktif}";
+            $status_spin = preg_replace_callback("/\{([^}]+)\}/", $replacement, $status); 
             $data[] = [
-                'foto' => 'avatar'.rand(2,5).'.png',
+                'foto' => 'avatar'.rand(1,5).'.png',
                 'username' => $username_spin,
                 'password' => password_hash(1234, PASSWORD_DEFAULT),
                 'nama' => $nama_spin,
@@ -40,6 +42,7 @@ class User extends Seeder
                 'tgl_lahir' => date('Y-m-d'),   
                 'email' => $username_spin.'@gmail.com',
                 'level' => $level_spin,
+                'status' => $status_spin,
                 'created_at' => date('Y-m-d H:i:s'),         
             ];
         }  

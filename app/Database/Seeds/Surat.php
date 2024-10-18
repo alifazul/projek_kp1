@@ -39,7 +39,7 @@ class Surat extends Seeder
             $sifat_spin = preg_replace_callback("/\{([^}]+)\}/", $replacement, $sifat);
             $ket = "{masuk|keluar}";
             $ket_spin = preg_replace_callback("/\{([^}]+)\}/", $replacement, $ket);
-            $file = "{E-Perpustakaan  User_1|AdminLTE 3  DataTables|LP_S}";
+            $file = "{E-Perpustakaan  User_1|AdminLTE 3  DataTables|E-Perpustakaan  User_2}";
             $file_spin = preg_replace_callback("/\{([^}]+)\}/", $replacement, $file); 
             $data[] = [
                 'surat' => $surat_spin,

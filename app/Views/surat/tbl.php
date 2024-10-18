@@ -137,10 +137,10 @@
                         <a class="btn btn-default btn-sm" href="<?= base_url('home/detail/'.$row['id_surat']) ?>" target="_blank">
                             <i class="far fa-eye"></i>
                         </a>
-                        <a class="btn btn-warning btn-sm" href="<?= base_url('surat/edit/'.$row['id_surat']) ?>">
+                        <a class="btn btn-warning btn-sm" href="<?= base_url('surat/edit/'.$ket.'/'.$row['id_surat']) ?>">
                             <i class="far fa-edit"></i>  
                         </a>
-                        <a id="hapus" class="btn btn-danger btn-sm" href="<?= base_url('surat/delete/'.$row['id_surat']) ?>">
+                        <a id="hapus" class="btn btn-danger btn-sm" href="<?= base_url('surat/delete/'.$ket.'/'.$row['id_surat']) ?>">
                             <i class="far fa-trash-alt"></i>  
                         </a>
                     <?php } ?>
@@ -193,25 +193,7 @@
 
             // Office Column search Select
             $('#filtertahun').on('change', function() {
-                table.column(2).search( this.value).draw();
-            });
-            $('#hapus').on('click', function(){
-            var getLink = $(this).attr('href');
-                Swal.fire({
-                    title: "Yakin hapus data?",            
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#d33',
-                    confirmButtonText: 'Ya',
-                    cancelButtonColor: '#3085d6',
-                    cancelButtonText: "Batal"
-                }).then(result => {
-                    //jika klik ya maka arahkan ke proses.php
-                    if(result.isConfirmed){
-                        window.location.href = getLink
-                    }
-                })
-            return false;
+                table.column(4).search( this.value).draw();
             });
         });
         

@@ -3,6 +3,7 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Models\UserM;
+use App\Models\SuratM;
 
 class User extends BaseController
 {
@@ -91,17 +92,25 @@ class User extends BaseController
     }
 
     public function update($id_user){
-        if(session()->level != 'Admin'){
+       if(session()->level != 'Admin'){
             return redirect()->to('dashboard')->with('warning','Anda tidak bisa mengakses halaman ini');
        }
        $user = new UserM();
+       $detail = $user->detail($id_user);
        $file = $this->request->getFile('foto');
-       $fileName = $file->getClientName();
-       $ex = explode('.',$fileName);
-       array_pop($ex);
-       $fn = implode('',$ex);
-       if($file->isValid() && ! $file->hasMoved()){
-        $file->move('images/',$fileName);
+       if(strlen($file) > 0){
+            $fileName = $file->getClientName();
+            $ex = explode('.',$fileName);
+            array_pop($ex);
+            $fn = implode('',$ex);
+            if($file->isValid() && ! $file->hasMoved()){
+                    if(file_exists('images/'.$detail->foto)){
+                        unlink('images/'.$detail->foto);
+                    }
+                    $file->move('images/',$fileName);
+            }
+       }else{
+            $fn = $detail->foto;
        }
        $pass = $this->request->getPost('password');
        $password = password_hash($pass, PASSWORD_DEFAULT);
@@ -132,14 +141,68 @@ class User extends BaseController
             return redirect()->to('dashboard')->with('warning','Anda tidak bisa mengakses halaman ini');
         }
         $user = new UserM();
+        $detail = $user->detail($id_user);
+        $surat = new SuratM();
+        $surat = $surat->getSuratIDUser($id_user);
+        if($surat->countAllResults()>0){
+            return redirect()->to(base_url('user'))->with('warning',' Hapus data surat dengan username '.$detail->username.' terlebih dahulu.'); 
+        }else{
+            if(file_exists('images/'.$detail->foto)){
+                unlink('images/'.$detail->foto);
+            }
+            $user->delete($id_user);
+            return redirect()->to(base_url('user'))->with('success','Data User Berhasil Dihapus ');
+        }
         //$data = $user->detail($id_user);
         //unlink('images/'.$data['foto']);
-        $user->delete($id_user);
-        return redirect()->to(base_url('user'))->with('success','Data User Berhasil Dihapus ');
+        
 	}
 
     public function reset_password($id_user){
-
+        if(session()->level != 'Admin'){
+            return redirect()->to('dashboard')->with('warning','Anda tidak bisa mengakses halaman ini');
+       }
+       $user = new UserM();
+       $pass = $this->kodeAcak(6);
+       $password = password_hash($pass, PASSWORD_DEFAULT);
+       $data = [
+        'id_user'=>$id_user,
+        'password' => $password,
+       ];
+       $user->edit($data);
+       return redirect()->to('user')->with('success','Password Baru = '.$pass);
     }
 
+    public function edit_status($id_user){
+        if(session()->level != 'Admin'){
+            return redirect()->to('dashboard')->with('warning','Anda tidak bisa mengakses halaman ini');
+       }
+       $user = new UserM();
+       $detail = $user->detail($id_user);
+       if($detail->status == 'aktif'){
+            $status = 'nonaktif';
+       }else if($detail->status == 'nonaktif'){
+            $status = 'aktif';
+       }
+       $data = [
+        'id_user'=>$id_user,
+        'status' => $status,
+       ];
+       $user->edit($data);
+       return redirect()->to('user')->with('success','Status User Berhasil diubah');
+    }
+
+    function kodeAcak($panjang){
+        $karakter = '';
+        $karakter .= 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'; // karakter alfabet
+        $karakter .= '1234567890'; // karakter numerik
+        $karakter .= '@#$^*()_+=/?'; // karakter simbol
+
+        $string = '';
+        for ($i=0; $i < $panjang; $i++) { 
+            $pos = rand(0, strlen($karakter)-1);
+            $string .= $karakter[$pos];
+        }
+        return $string;
+    }
 }

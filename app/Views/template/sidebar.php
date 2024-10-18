@@ -26,20 +26,26 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="<?= base_url('surat/masuk') ?>" class="nav-link <?= (!empty($side_sm) ? $side_sm : '') ?>">
+                            <a href="<?= base_url('surat/masuk') ?>" class="nav-link <?= (!empty($side_masuk) ? $side_masuk : '') ?>">
                                 <i class="material-icons">archive</i>
                                 <p>&nbsp; Surat Masuk</p>
                             </a>
                         </li>
                         <li class="nav-item ">
-                            <a href="<?= base_url('surat/keluar') ?>" class="nav-link <?= (!empty($side_sk) ? $side_sk : '') ?>">
+                            <a href="<?= base_url('surat/keluar') ?>" class="nav-link <?= (!empty($side_keluar) ? $side_keluar : '') ?>">
                                 <i class="material-icons">unarchive</i>
                                 <p>&nbsp; Surat Keluar</p>
                             </a>
                         </li>
+                        <li class="nav-item ">
+                            <a href="<?= base_url('kategori') ?>" class="nav-link <?= (!empty($side_kat) ? $side_kat : '') ?>">
+                                <i class="fas fa-tags"></i>
+                                <p>&nbsp; Kategori</p>
+                            </a>
+                        </li>
                         <?php if (session()->get('level')=='Admin') { ?>
-                        <li class="nav-item <?= (!empty($side_user) ? $side_user : '') ?>">
-                            <a href="<?= base_url('user') ?>" class="nav-link">
+                        <li class="nav-item ">
+                            <a href="<?= base_url('user') ?>" class="nav-link <?= (!empty($side_user) ? $side_user : '') ?>">
                                 <i class="nav-icon fas fa-users"></i>
                                 <p>User</p>
                             </a>

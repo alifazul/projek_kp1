@@ -3,7 +3,7 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Models\SuratM;
-use App\Models\UserM;
+use App\Models\KategoriM;
 use CodeIgniter\HTTP\Request;
 
 class Surat extends BaseController
@@ -14,10 +14,11 @@ class Surat extends BaseController
         $id_user = session()->get('id_user');
         $level = session()->get('level');
         $surat = new SuratM();
+        $kat = new KategoriM();
         if($level=='Admin'){
-            $surats = $surat->getSurat()->findAll();
+            $surats = $surat->getSuratAll();
         }elseif($level=='User'){
-            $surats = $surat->getSurat()->where('tb_surat.id_user',$id_user)->findAll();
+            $surats = $surat->getSuratIdUser($id_user)->findAll();
         }
         $data = [
             'title'=> 'Tabel Surat',
@@ -26,8 +27,8 @@ class Surat extends BaseController
             'side_surat'=>'active',
             'ket'=>'',
             'level'=>$level,
-            'kat1'=>$surat->getKat1(),
-            'kat2'=>$surat->getKat2(),
+            'kat1'=>$kat->getKat1(),
+            'kat2'=>$kat->getKat2(),
             'bulan' =>$surat->getMonth(),
             'tahun'=>$surat->getYear(),
             'surats'=> $surats
@@ -41,21 +42,22 @@ class Surat extends BaseController
         $id_user = session()->get('id_user');
         $level = session()->get('level');
         $surat = new SuratM();
+        $kat = new KategoriM();
         if($level=='Admin'){
-            $surats = $surat->getSurat();
-        }else{
-            $surats = $surat->getSurat()->where('tb_surat.id_user',$id_user);
+            $surat = $surat->getSurat();
+        }elseif($level=='User'){
+            $surat = $surat->getSuratIdUser($id_user);
         }
-        $surats = $surat->where('tb_surat.ket','masuk')->findAll();
+        $surats = $surat->where('tb_surat.ket','Masuk')->findAll();
         $data = [
             'title'=> 'Tabel Surat',
             'nav'=>'nav_dash',
             'side'=>'sidebar',
-            'side_sm'=>'active',
+            'side_masuk'=>'active',
             'ket'=>'masuk',
             'level'=>$level,
-            'kat1'=>$surat->getKat1(),
-            'kat2'=>$surat->getKat2(),
+            'kat1'=>$kat->getKat1(),
+            'kat2'=>$kat->getKat2(),
             'bulan' =>$surat->getMonth(),
             'tahun'=>$surat->getYear(),
             'surats'=> $surats
@@ -68,21 +70,22 @@ class Surat extends BaseController
         $id_user = session()->get('id_user');
         $level = session()->get('level');
         $surat = new SuratM();
+        $kat = new KategoriM();
         if($level=='Admin'){
-            $surats = $surat->getSurat();
-        }else{
-            $surats = $surat->getSurat()->where('tb_surat.id_user',$id_user);
+            $surat = $surat->getSurat();
+        }elseif($level=='User'){
+            $surat = $surat->getSuratIdUser($id_user);
         }
-        $surats = $surat->where('tb_surat.ket','keluar')->findAll();
+        $surats = $surat->where('tb_surat.ket','Keluar')->findAll();
         $data = [
             'title'=> 'Tabel Surat',
             'nav'=>'nav_dash',
             'side'=>'sidebar',
-            'side_sk'=>'active',
-            'ket'=>'keluar',
+            'side_keluar'=>'active',
+            'ket'=>'Keluar',
             'level'=>$level,
-            'kat1'=>$surat->getKat1(),
-            'kat2'=>$surat->getKat2(),
+            'kat1'=>$kat->getKat1(),
+            'kat2'=>$kat->getKat2(),
             'bulan' =>$surat->getMonth(),
             'tahun'=>$surat->getYear(),
             'surats'=> $surats
@@ -92,41 +95,42 @@ class Surat extends BaseController
     }
 
     public function add($ket){
-        $surat = new SuratM();
+        $kat = new KategoriM();
         if($ket=='masuk'){
-            $data['side_sm']='active';
+            $data['side_masuk']='active';
         }elseif($ket=='keluar'){
-            $data['side_sk']='active';
+            $data['side_keluar']='active';
         }
         $data['title']='Tambah Surat';
         $data['nav']='nav_dash';
         $data['side']='sidebar';
         $data['ket']=$ket;
-        $data['kat1']=$surat->getKat1();
-        $data['kat2']=$surat->getKat2();
+        $data['kat1']=$kat->getKat1();
+        $data['kat2']=$kat->getKat2();
         return view('surat/add',$data);
     }
     
-    public function edit($id_surat){
+    public function edit($ket,$id_surat){
+        $kat = new kategoriM();
         $surat = new SuratM();
         $surats = $surat->detail($id_surat);
-        $ket = $surat->ket;
         $data = [
             'title'=> 'Edit Surat',
             'nav'=>'nav_dash',
             'side'=>'sidebar',
             'ket'=>$ket,
-            'side_surat'=>'active',
-            'kat1'=>$surat->getKat1(),
-            'kat2'=>$surat->getKat2(),
+            'side_'.$ket=>'active',
+            'kat1'=>$kat->getKat1(),
+            'kat2'=>$kat->getKat2(),
             'surat'=>$surats,
         ];
         return view('surat/edit',$data);
     }
 
-    public function simpan($ket){
+    public function simpan(){
        $surat = new SuratM();
        $file = $this->request->getFile('file');
+       $ket = $this->request->getPost( 'ket');
        $fileName = $file->getClientName();
        $ex = explode('.',$fileName);
        array_pop($ex);
@@ -155,8 +159,11 @@ class Surat extends BaseController
         'kat2' => $this->request->getPost('kat2'),
         'perihal' => $this->request->getPost('perihal'),
         'terusan' => $terusan,
+        'ket_terusan' => $this->request->getPost('ket_terusan'),
         'tindakan' => $tindakan,
+        'ket_tindakan' => $this->request->getPost('ket_tindakan'),
         'catatan'=> $this->request->getPost( 'catatan'),
+        'ket'=> $ket,
         'id_user'=>session()->get('id_user'),
         'file' => $fn,
        ];
@@ -170,13 +177,6 @@ class Surat extends BaseController
     public function update($id_surat)
     {
         $surat = new SuratM();
-        /*
-        $file = $this->request->getFile('file');
-        if($file->isValid() && ! $file->hasMoved()){
-            $fileName = $file->getClientName();
-            $file->move('uploads/',$fileName);
-        }
-        unlink('uploads/'.$surat['file']);*/
         $ket =  $this->request->getPost('ket');
         $array_te = $this->request->getPost('terusan');
         $terusan['terusan'] = implode(';',$array_te);
@@ -196,21 +196,48 @@ class Surat extends BaseController
             'kat2' => $this->request->getPost('kat2'),
             'perihal' => $this->request->getPost('perihal'),
             'terusan' => $terusan,
+            'ket_terusan' => $this->request->getPost('ket_terusan'),
             'tindakan' => $tindakan,
+            'ket_tindakan' => $this->request->getPost('ket_tindakan'),
             'catatan'=> $this->request->getPost( 'catatan'),
         ];
         $surat->edit($data);
         return redirect()->to(base_url('surat/'.$ket))->with('success','Data Surat Berhasil Diubah');
     }
 
+    public function updatefile($id_surat)
+    {
+        $surat = new SuratM();
+        $file = $this->request->getFile('file');
+        $ket =  $this->request->getPost('ket');
+        if($file->isValid() && ! $file->hasMoved()){
+            $fileName = $file->getClientName();
+            $ex = explode('.',$fileName);
+            array_pop($ex);
+            $fn = implode('',$ex);
+            $file->move('uploads/',$fileName);
+            $detail = $surat->detail($id_surat);
+            if(file_exists('uploads/'.$detail->file)){
+                unlink('uploads/'.$detail->file);
+            }
+        }
+        $data = [
+            'id_surat' => $id_surat,
+            'file'=>$fn,
+        ];
+        $surat->edit($data);
+        return redirect()->to(base_url('surat/'.$ket))->with('success','Data Surat Berhasil Diubah');
+    }
     // Delete
-	public function delete($id_surat)
+	public function delete($ket,$id_surat)
 	{
         $surat = new SuratM();
-        //$data = $surat->detail($id_surat);
-        //unlink('uploads/'.$data->file);
+        $data = $surat->detail($id_surat);
+        if(file_exists('uploads/'.$data->file)){
+            unlink('uploads/'.$data->file);
+        }
         $surat->delete($id_surat);
-        return redirect()->to(base_url('Surat'))->with('success','Data Surat Berhasil Dihapus ');
+        return redirect()->to(base_url('surat/'.$ket))->with('success','Data Surat Berhasil Dihapus ');
 	}
 
 }

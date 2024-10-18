@@ -2,19 +2,13 @@
 
 namespace App\Controllers;
 use App\Models\SuratM;
+use App\Models\KategoriM;
 use Dompdf\Dompdf;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 class Home extends BaseController
 {
-	/*public $an;
-	public $kat1;
-	public $kat2;
-	public $cari;
-	public $bulan;
-	public $tahun;
-	public $sort;*/
 
 	public function __construct()
     {
@@ -24,6 +18,7 @@ class Home extends BaseController
 	public function index()
     {
 		$surat = new SuratM();
+		$kat = new KategoriM();
         $data = [
 			'title'=> 'Cari',
 			'header'=>'Cari',
@@ -32,8 +27,8 @@ class Home extends BaseController
 			'nav' => 'nav_home',
 			'side'=>'',
 			'nav_home'=>'active',
-			'kat1'=>$surat->getKat1(),
-            'kat2'=>$surat->getKat2(),
+			'kat1'=>$kat->getKat1(),
+            'kat2'=>$kat->getKat2(),
 			'bulan'=>$surat->getMonth(),
             'tahun'=>$surat->getYear(),
         ];
@@ -68,6 +63,7 @@ class Home extends BaseController
 		];
 		return view('surat/item',$data);
 	}
+	
 	function get_surat($kat1,$kat2,$ket,$sort,$cari,$bulan,$tahun){
 		if(strlen($ket)>0){
 			$ket = $ket;

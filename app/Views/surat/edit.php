@@ -110,7 +110,7 @@
                                 </div>
                                 <input type="text" class="form-control" name="terusan[0]" value="<?= $te[0] ?>">
                             </div>
-                            <div class="input-group">
+                            <div class="input-group mt-1">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">
                                         <input type="checkbox" name="checkter[1]" value='1' <?php if($te[1] != ' '){?> checked <?php } ?>>
@@ -118,13 +118,16 @@
                                 </div>
                                 <input type="text" class="form-control" name="terusan[1]" value="<?= $te[1] ?>">
                             </div>
-                            <div class="input-group">
+                            <div class="input-group mt-1">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">
                                         <input type="checkbox" name="checkter[2]" value='2' <?php if($te[2] != ' '){?> checked <?php } ?>>
                                     </span>
                                 </div>
                                 <input type="text" class="form-control" name="terusan[2]" value="<?= $te[2] ?>">
+                            </div>
+                            <div class="form-line mt-1">
+                                <textarea name="ket_terusan" cols="30" rows="2" class="form-control no-resize"><?= $surat->ket_terusan?></textarea>
                             </div>
                         </div>
                     </div>
@@ -147,7 +150,7 @@
                                 </div>
                                 <input type="text" class="form-control" name="tindakan[0]" value="<?= $ti[0] ?>">
                             </div>
-                            <div class="input-group">
+                            <div class="input-group mt-1">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">
                                         <input type="checkbox" name="checktin[1]" value='1' <?php if($ti[1] != ' '){?> checked <?php } ?>>
@@ -155,13 +158,16 @@
                                 </div>
                                 <input type="text" class="form-control" name="tindakan[1]" value="<?= $ti[1] ?>">
                             </div>
-                            <div class="input-group">
+                            <div class="input-group mt-1">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">
                                         <input type="checkbox" name="checktin[2]" value='2' <?php if($ti[2] != ' '){?> checked <?php } ?>>
                                     </span>
                                 </div>
                                 <input type="text" class="form-control" name="tindakan[2]" value="<?= $ti[2] ?>">
+                            </div>
+                            <div class="form-line mt-1">
+                                <textarea name="ket_tindakan" cols="30" rows="2" class="form-control no-resize"><?= $surat->ket_tindakan?></textarea>
                             </div>
                         </div>
                     </div>
@@ -186,7 +192,7 @@
         <div class="card-header">
             <h3 class="card-title"><?= $surat->file ?></h3>
             <div class="card-tools">
-                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#modal-default<?=$surat->id_surat?>">
+                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#modal-large<?=$surat->id_surat?>">
                     Ubah File
                 </button>
             </div>
@@ -200,7 +206,7 @@
     </div>
     <!--END View PDF File-->
 
-    <div class="modal fade" id="modal-default<?=$surat->id_surat?>">
+    <div class="modal fade" id="modal-large<?=$surat->id_surat?>">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
@@ -209,24 +215,25 @@
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <div class="modal-body">
-                <form action="<?= base_url('surat/update/'.$surat->id_surat)?>" method="post" enctype="multipart/form-data">
-                    <div class="form-group form-float">
-                        <label>File</label>
-                        <div class="form-group input-group mb-3">
-                            <div class="custom-file">
-                                <input type="file" id="fileUbah" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" name="file">
-                                <label class="custom-file-label" for="inputGroupFile01" name="file">Choose file</label>
+            <form action="<?= base_url('surat/updatefile/'.$surat->id_surat)?>" method="post" enctype="multipart/form-data">
+                <div class="modal-body">
+                        <div class="form-group form-float">
+                            <label>File</label>
+                            <div class="form-group input-group mb-3">
+                                <div class="custom-file">
+                                    <input type="file" id="fileUbah" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" name="file">
+                                    <label class="custom-file-label" for="inputGroupFile01" name="file">Choose file</label>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <iframe id="filePreview" width="100%"></iframe>
-                </form>
-            </div>
-            <div class="modal-footer justify-content-between">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
+                        <iframe id="filePreview" width="100%"></iframe>
+                        <input type="hidden" name="ket" value="<?=$surat->ket?>">
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Ubah</button>
+                </div>
+            </form>
           </div>
           <!-- /.modal-content -->
         </div>
