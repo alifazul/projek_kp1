@@ -39,7 +39,7 @@
                     <label>Bulan</label>
                     <select id="filterbulan" class="form-control" style="width: 100%;">
                     <option value="">Semua</option>
-                    <?php foreach ($bulan as $filter): ?>
+                    <?php sort($bulan);foreach ($bulan as $filter): ?>
                             <option value="<?php 
                                 if($filter<10){
                                     echo '-0'.$filter.'-';
@@ -58,7 +58,7 @@
                     <label>Tahun</label>
                     <select id="filtertahun" class="form-control select" style="width: 100%;">
                     <option value="">Semua</option>
-                    <?php foreach ($tahun as $filter): ?>
+                    <?php sort($tahun);foreach ($tahun as $filter): ?>
                             <option value="<?= $filter ?>"><?= $filter ?></option>
                         <?php endforeach ?>
                     </select>
@@ -140,7 +140,7 @@
                         <a class="btn btn-warning btn-sm" href="<?= base_url('surat/edit/'.$ket.'/'.$row['id_surat']) ?>">
                             <i class="far fa-edit"></i>  
                         </a>
-                        <a id="hapus" class="btn btn-danger btn-sm" href="<?= base_url('surat/delete/'.$ket.'/'.$row['id_surat']) ?>">
+                        <a id="" class="btn btn-danger btn-sm" href="<?= base_url('surat/delete/'.$row['id_surat']) ?>" onclick="return confirm('Yakin hapus data surat <?=$row['surat']?>?')">
                             <i class="far fa-trash-alt"></i>  
                         </a>
                     <?php } ?>
@@ -154,6 +154,7 @@
         </table>
     </div>
 </div>
+
 <!--END Tabel Surat-->
 <?= $this->endSection()?>
 
@@ -195,6 +196,7 @@
             $('#filtertahun').on('change', function() {
                 table.column(4).search( this.value).draw();
             });
+
         });
         
     </script>

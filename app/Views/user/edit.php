@@ -97,6 +97,12 @@
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group form-float">
+                                    <label for="email_address">Email</label>
+                                    <div class="form-line">
+                                        <input type="email" class="form-control" name="email" value="<?=$user->email?>" readonly>
+                                    </div>
+                                </div>
+                                <div class="form-group form-float">
                                     <label for="email_address">Jenis Kelamin</label>
                                     <div class="form-group">
                                         <input type="radio" name="jenis_kelamin" id="x" class="with-gap" value="Laki-Laki" <?php if($user->jenis_kelamin=='Laki-Laki') { ?> checked <?php }?>>

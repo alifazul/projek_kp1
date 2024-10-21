@@ -12,7 +12,7 @@ class AuthFilters implements FilterInterface
     {
         // Do something here
         if(session()->get('log') != true){
-            return redirect()->to(base_url('home/login'))->with('success','Belum Login');
+            return redirect()->to(base_url('home/login'))->with('warning','Belum Login');
         }
     }
 

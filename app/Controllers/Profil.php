@@ -26,16 +26,25 @@ class Profil extends BaseController
             return redirect()->to('profil')->with('warning','Anda tidak bisa mengakses halaman ini');
         }
         $user = new UserM();   
-        $foto = $this->request->getFile('foto');
-        if($foto->isValid() && ! $foto->hasMoved()){
-         $fotoName = $foto->getClientName();
-         $foto->move('images/',$fotoName);
+        $detail = $user->detail($id_user);
+        $file = $this->request->getFile('foto');
+        if(strlen($file) > 0){
+            $fileName = $file->getClientName();
+            $ex = explode('.',$fileName);
+            array_pop($ex);
+            $fn = implode('',$ex);
+            if($file->isValid() && ! $file->hasMoved()){
+                    if(file_exists('images/'.$detail->foto)){
+                        unlink('images/'.$detail->foto);
+                    }
+                    $file->move('images/',$fileName);
+            }
+        }else{
+                $fn = $detail->foto;
         }
-        $foto = $user['foto'];
-        unlink('images/'.$foto);
         $data = [
          'id_user' => $id_user,
-         'foto' => $fotoName,
+         'foto' => $fn,
          'username' => $this->request->getPost('username'),
          'nama' => $this->request->getPost('nama'), 
          'nip' => $this->request->getPost('nip'),

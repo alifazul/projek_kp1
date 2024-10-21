@@ -18,7 +18,7 @@ class Surat extends BaseController
         if($level=='Admin'){
             $surats = $surat->getSuratAll();
         }elseif($level=='User'){
-            $surats = $surat->getSuratIdUser($id_user)->findAll();
+            $surats = $surat->getSuratIdUser($id_user)->orderBy('id_surat','DESC')->findAll();
         }
         $data = [
             'title'=> 'Tabel Surat',
@@ -48,7 +48,7 @@ class Surat extends BaseController
         }elseif($level=='User'){
             $surat = $surat->getSuratIdUser($id_user);
         }
-        $surats = $surat->where('tb_surat.ket','Masuk')->findAll();
+        $surats = $surat->where('tb_surat.ket','Masuk')->orderBy('id_surat','DESC')->findAll();
         $data = [
             'title'=> 'Tabel Surat',
             'nav'=>'nav_dash',
@@ -76,7 +76,7 @@ class Surat extends BaseController
         }elseif($level=='User'){
             $surat = $surat->getSuratIdUser($id_user);
         }
-        $surats = $surat->where('tb_surat.ket','Keluar')->findAll();
+        $surats = $surat->where('tb_surat.ket','Keluar')->orderBy('id_surat','DESC')->findAll();
         $data = [
             'title'=> 'Tabel Surat',
             'nav'=>'nav_dash',
@@ -229,15 +229,15 @@ class Surat extends BaseController
         return redirect()->to(base_url('surat/'.$ket))->with('success','Data Surat Berhasil Diubah');
     }
     // Delete
-	public function delete($ket,$id_surat)
+	public function delete($id_surat)
 	{
         $surat = new SuratM();
         $data = $surat->detail($id_surat);
-        if(file_exists('uploads/'.$data->file)){
-            unlink('uploads/'.$data->file);
+        if(file_exists('uploads/'.$data->file.'.pdf')){
+            unlink('uploads/'.$data->file.'.pdf');
         }
         $surat->delete($id_surat);
-        return redirect()->to(base_url('surat/'.$ket))->with('success','Data Surat Berhasil Dihapus ');
+        return redirect()->to(base_url('surat/'.$data->ket))->with('success','Data Surat Berhasil Dihapus ');
 	}
 
 }

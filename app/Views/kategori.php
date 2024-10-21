@@ -8,13 +8,13 @@
                         <h3 class="card-title">Kategori 1</h3>
                     </div>
                     <div class="card-header">
-                        <form class="">
+                        <form class="" method="post" action="<?=base_url('kategori/add/kat1')?>">
                             <div class="form-row">
                                 <div class="col-6">
-                                <input type="text" class="form-control" name="kat2" placeholder="Tambah Kategori 2">
+                                    <input type="text" class="form-control" name="kat" placeholder="Tambah Kategori 2">
                                 </div>
                                 <div class="col">
-                                <button class="btn btn-info" type="submit">Tambah</button>
+                                    <button class="btn btn-info" type="submit">Tambah</button>
                                 </div>
                             </div>
                         </form>
@@ -35,7 +35,7 @@
                                         <td><?=$no?></td>
                                         <td><?=$k['kat1']?></td>
                                         <td>
-                                            <a class="btn bg-red hapus_kat" href="<?=base_url('kategori/delete/kat1/'.$k['kat1'])?>">
+                                            <a class="btn bg-red hapus" href="<?=base_url('kategori/delete/kat1/'.$k['kat1'])?>">
                                                 <i class="fas fa-trash-alt"></i>
                                             </a>
                                         </td>
@@ -55,13 +55,13 @@
                         <h3 class="card-title">Kategori 2</h3>
                     </div>
                     <div class="card-header">
-                        <form class="">
+                        <form class="" method="post" action="<?=base_url('kategori/add/kat2')?>">
                             <div class="form-row">
                                 <div class="col-6">
-                                <input type="text" class="form-control" name="kat2" placeholder="Tambah Kategori 2">
+                                    <input type="text" class="form-control" name="kat" placeholder="Tambah Kategori 2">
                                 </div>
                                 <div class="col">
-                                <button class="btn btn-info" type="submit">Tambah</button>
+                                    <button class="btn btn-info" type="submit">Tambah</button>
                                 </div>
                             </div>
                         </form>
@@ -82,7 +82,7 @@
                                         <td><?=$no?></td>
                                         <td><?=$k['kat2']?></td>
                                         <td>
-                                            <a class="btn bg-red hapus_kat" href="<?=base_url('kategori/delete/kat2/'.$k['kat2'])?>">
+                                            <a class="btn bg-red hapus" href="<?=base_url('kategori/delete/kat2/'.$k['kat2'])?>">
                                                 <i class="fas fa-trash-alt"></i>
                                             </a>
                                         </td>
@@ -113,25 +113,7 @@
                     "responsive": true,
                     "lengthChange": false,
                     "autoWidth": false,
-                })
-                $('.hapus_kat').on('click', function(){
-                    var getLink = $(this).attr('href');
-                    Swal.fire({
-                        title: "Yakin Hapus Data?",            
-                        icon: 'warning',
-                        showCancelButton: true,
-                        confirmButtonColor: '#d33',
-                        confirmButtonText: 'Ya',
-                        cancelButtonColor: '#3085d6',
-                        cancelButtonText: "Batal"
-                    }).then(result => {
-                        //jika klik ya maka arahkan ke home
-                        if(result.isConfirmed){
-                            window.location.href = getLink
-                        }
-                    })
-                    return false;
-                });
+                })             
             });
         </script>
     <?= $this->endSection()?>

@@ -238,20 +238,20 @@
           <!-- /.modal-content -->
         </div>
         <!-- /.modal-dialog -->
-      </div>
-      <!-- /.modal -->
+    </div>
+    <!-- /.modal -->
 
 <?= $this->endSection()?>
 <?= $this->section('js_custom')?>
     <script>
         document.getElementById('fileUbah').addEventListener('change', function(event) {
-        const file = event.target.files[0];
-        if (file.type === "application/pdf") {
-            const fileURL = URL.createObjectURL(file);
-            document.getElementById('filePreview').src = fileURL;
-        } else {
-            alert("Please upload a valid PDF file.");
-        }
+            const file = event.target.files[0];
+            if (file.type === "application/pdf") {
+                const fileURL = URL.createObjectURL(file);
+                document.getElementById('filePreview').src = fileURL;
+            } else {
+                alert("Please upload a valid PDF file.");
+            }
         });
     </script>
 <?= $this->endSection()?>

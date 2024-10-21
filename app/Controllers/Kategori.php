@@ -22,21 +22,30 @@ class Kategori extends BaseController
         return view('kategori',$data);
     }
 
+    public function add($kat){
+       $user = new KategoriM();
+       $data = [
+        $kat => $this->request->getPost('kat'),
+       ];
+       $user->tambah($data,$kat);
+       return redirect()->to('kategori')->with('success','Kategori Berhasil Ditambahkan');
+    }
+
     public function delete($kat, $id_kat)
 	{
-        $tkat = new KategoriM();
+        $t_kat = new KategoriM();
         $surat = new SuratM();
         if($kat=='kat1'){
-            $tkat = $tkat->detailKat1($id_kat);
+            $tkat = $t_kat->detailKat1($id_kat);
             $surat = $surat->getSuratKat1($id_kat);
         }elseif($kat=='kat2'){
-            $tkat = $tkat->detailKat2($id_kat);
+            $tkat = $t_kat->detailKat2($id_kat);
             $surat = $surat->getSuratKat2($id_kat);
         }
         if($surat>0){
             return redirect()->to(base_url('kategori'))->with('warning',' Hapus data surat dengan kategori '.$tkat->$kat.' terlebih dahulu.'); 
         }else{
-            $tkat->delete();
+            $t_kat->delete('tb_'.$kat);
             return redirect()->to(base_url('kategori'))->with('success','Data '.$kat.' Berhasil Dihapus ');
         }
 	}

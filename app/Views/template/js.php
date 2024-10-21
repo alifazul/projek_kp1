@@ -22,4 +22,5 @@
     <script src = "<?= base_url('plugins/datatables-buttons/js/buttons.print.min.js')?>"></script>
     <script src = "<?= base_url('plugins/datatables-buttons/js/buttons.colVis.min.js')?>"></script>
     <!-- Sweetalert2 -->
-    <script src = "<?= base_url('plugins/sweetalert2/sweetalert2.min.js')?>"></script>  
+    <script src = "<?= base_url('plugins/sweetalert2/sweetalert2.min.js')?>"></script> 
+    <script src="<?= base_url('')?>plugins/chart.js/Chart.min.js"></script> 

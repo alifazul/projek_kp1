@@ -26,6 +26,12 @@ class KategoriM extends Model {
         ->where('tb_kat2.kat2',$kat2)
         ->get()->getRow();
     }
+
+    public function tambah($data,$kat)
+    {
+        $builder = $this->db->table('tb_'.$kat);
+        $builder->insert($data);
+    }
 }
 
 ?>

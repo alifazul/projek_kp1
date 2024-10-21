@@ -17,7 +17,7 @@ class SuratM extends Model {
 
     public function getSuratAll()
     {
-        $builder = $this->getSurat()->findAll();
+        $builder = $this->getSurat()->orderBy('id_surat','DESC')->findAll();
         return $builder;
     }
 
@@ -76,6 +76,11 @@ class SuratM extends Model {
         return $surats;
     }
 
+    function getDataperTahun($tahun)
+        {
+            return $this->db->table('tb_surat')->like('tgl_surat',$tahun)->get()->getResult();
+        }
+
     public function getKat1(){
         return $this->db->table('tb_kat1')
         ->get()->getResultArray();
@@ -115,6 +120,10 @@ class SuratM extends Model {
         return $tahun;
     } 
 
+    public function getTotal($con){
+        $builder = $this->select('count(ket) as total')->where('ket',$con)->groupBy('month(tgl_surat)')->findAll();
+        return $builder;
+    }
     
     // detail
     public function detail($id_surat)

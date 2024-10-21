@@ -18,6 +18,15 @@ class AuthM extends Model {
     ]);
    }
 
+   // detail
+   public function detail($username)
+   {
+       return $this->db->table('tb_user')
+       ->select('*')
+       ->where('username',$username)
+       ->get()->getRow();
+   }
+
     public function login($user){
         return $this->db->table('tb_user')->where([
             'username'=>$user,

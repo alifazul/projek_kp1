@@ -1,6 +1,7 @@
 <?php
 namespace App\Controllers;
 use App\Models\AuthM;
+use App\Models\UserM;
 class Auth extends BaseController
 {
     public function __construct()
@@ -14,21 +15,25 @@ class Auth extends BaseController
                 $pass = $this->request->getPost('password');
                 if(strlen($user)>0 && strlen($pass)>0){
                   //code run when it is true
-                  $auth = new AuthM();
+                    $auth = new AuthM();
                     $username = $auth->getUser($user);
                     if($username->getNumRows() > 0){
                         $xx = $username->getRow();
-                        if(password_verify($pass,$xx->password)){
-                            session()->set('log',true);
-                            session()->set('id_user',$xx->id_user);
-                            session()->set('nama',$xx->nama);
-                            session()->set('level',$xx->level);
-                            session()->set('password',$xx->password);
-                            session()->set('foto',$xx->foto);
-                            return redirect()->to(base_url('home'))->with('success','Berhasil Login');
-                        }else{
-                            return redirect()->to(base_url('home/login'))
-                            ->with('error','Password Salah');
+                        if($xx->status=='aktif'){
+                            if(password_verify($pass,$xx->password)){
+                                session()->set('log',true);
+                                session()->set('id_user',$xx->id_user);
+                                session()->set('nama',$xx->nama);
+                                session()->set('level',$xx->level);
+                                session()->set('password',$xx->password);
+                                session()->set('foto',$xx->foto);
+                                return redirect()->to(base_url('home'))->with('success','Berhasil Login');
+                            }else{
+                                return redirect()->to(base_url('home/login'))
+                                ->with('error','Password Salah');
+                            }
+                        }elseif($xx->status=='nonaktif'){
+                            return redirect()->to(base_url('home/login'))->with('error','Username belum diaktifkan');
                         }
                     }else{
                         return redirect()->to(base_url('home/login'))->with('error','Username Salah');
