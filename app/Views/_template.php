@@ -18,9 +18,9 @@
             <div class="content-wrapper">
                 <div class="content-header">
                     <div class="container-fluid">
-                        <div class="row mt-5">
+                        <div class="row mt-3">
                             <div class="col">
-                                <h1 class="text-center"><?= (!empty($header) ? $header : '') ?></h1>
+                                <h1 class="text-center"></h1>
                             </div>
                         </div>
                         <!-- /.row -->
@@ -47,7 +47,7 @@
                     title: "Gagal!",
                     text: swal,
                     icon: "error",
-                    timer: 1000
+                    timer: 2000
                 });
             }
         
@@ -57,7 +57,7 @@
                     title: "Berhasil!",
                     text: swals,
                     icon: "success",
-                    timer: 1000
+                    timer: 2000
                 });
         }
         const swalw = $('.swal-warning').data('swal');

@@ -35,27 +35,9 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group form-float">
-                                    <label for="">Bidang</label>
-                                    <div class=" form-line">
-                                        <input type="text" class="form-control" name="bidang" value="<?= $user->bidang?>" >
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="form-group form-float">
-                                    <label for="">Jabatan</label>
-                                    <div class=" form-line">
-                                        <input type="text" class="form-control" name="jabatan" value="<?= $user->jabatan?>">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <div class="form-group form-float">
-                                    <label for="">NIP</label>
-                                    <div class=" form-line">
-                                        <input type="" class="form-control" name="nip" value="<?= $user->nip?>">
+                                    <label for="email_address">Email</label>
+                                    <div class="form-line">
+                                        <input type="email" class="form-control" name="email" value="<?=$user->email?>">
                                     </div>
                                 </div>
                             </div>
@@ -71,24 +53,6 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group form-float">
-                                    <label for="">Tempat Lahir</label>
-                                    <div class=" form-line">
-                                        <input type="text" class="form-control" name="tempat_lahir" value="<?= $user->tempat_lahir?>">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="form-group form-float">
-                                    <label for="email_address">Tanggal Lahir</label>
-                                    <div class="form-line">
-                                        <input type="date" class="form-control" name="tgl_lahir" value="<?= $user->tgl_lahir?>">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <div class="form-group form-float">
                                     <label class="form-label">Alamat</label>
                                     <div class="form-line">
                                         <textarea name="alamat" cols="30" rows="5" class="form-control no-resize"><?= $user->alamat?></textarea>
@@ -97,9 +61,9 @@
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group form-float">
-                                    <label for="email_address">Email</label>
+                                    <label for="">Level</label>
                                     <div class="form-line">
-                                        <input type="email" class="form-control" name="email" value="<?=$user->email?>">
+                                            <input type="text" class="form-control" name="level" value="<?= $user->level?>" readonly>
                                     </div>
                                 </div>
                                 <div class="form-group form-float">
@@ -115,12 +79,6 @@
                         </div>
                     </div>
                     <div class="col-sm-3">
-                        <div class="form-group form-float">
-                            <label for="">Level</label>
-                            <div class="form-line">
-                                    <input type="text" class="form-control" name="level" value="<?= $user->level?>" readonly>
-                            </div>
-                        </div>
                         <div class="form-group form-float">
                             <label>Foto</label>
                             <input type="file" class="form-control-file mb-3" id="foto" name="foto" onchange="readImg(this);">

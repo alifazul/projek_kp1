@@ -4,7 +4,12 @@
             <!-- Main content -->
             <section class="content">
                 <div class="container">
-                    <div class="row mb-5">
+                    <div class="text-center mb-5">
+                        <h1 class="">SIARKO</h1>
+                        <p class="">Sistem Manajemen Arsip Dinkominfo Purbalingga</p>
+                        <br>
+                    </div>
+                    <div class="row mb-4">
                         <div class="col text-center">
                             <a id="pdf" class="btn btn-secondary" href="<?=base_url('home/ekspor_pdf')?>" >PDF</a>
                             <a id="pdf" class="btn btn-secondary" href="<?=base_url('home/ekspor_excel')?>" >XLSX</a>

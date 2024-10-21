@@ -77,11 +77,6 @@ class User extends BaseController
         'username' => $this->request->getPost('username'),
         'password' => $password,
         'nama' => $this->request->getPost('nama'), 
-        'nip' => $this->request->getPost('nip'),
-        'bidang' => $this->request->getPost('bidang'),
-        'jabatan' => $this->request->getPost('jabatan'),
-        'tempat_lahir' => $this->request->getPost('tempat_lahir'),
-        'tgl_lahir' => $this->request->getPost('tgl_lahir'),
         'email' => $this->request->getPost('email'),
         'level' => $this->request->getPost('level'),
         'jenis_kelamin' => $this->request->getPost('jenis_kelamin'),
@@ -120,11 +115,6 @@ class User extends BaseController
         'username' => $this->request->getPost('username'),
         'password' => $password,
         'nama' => $this->request->getPost('nama'), 
-        'nip' => $this->request->getPost('nip'),
-        'bidang' => $this->request->getPost('bidang'),
-        'jabatan' => $this->request->getPost('jabatan'),
-        'tempat_lahir' => $this->request->getPost('tempat_lahir'),
-        'tgl_lahir' => $this->request->getPost('tgl_lahir'),
         'email' => $this->request->getPost('email'),
         'level' => $this->request->getPost('level'),
         'jenis_kelamin' => $this->request->getPost('jenis_kelamin'),
@@ -196,7 +186,7 @@ class User extends BaseController
         $karakter = '';
         $karakter .= 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'; // karakter alfabet
         $karakter .= '1234567890'; // karakter numerik
-        $karakter .= '@#$^*()_+=/?'; // karakter simbol
+        $karakter .= '@#$^*()_+/?'; // karakter simbol
 
         $string = '';
         for ($i=0; $i < $panjang; $i++) { 
