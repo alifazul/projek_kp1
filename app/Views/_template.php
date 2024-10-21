@@ -7,7 +7,7 @@
 
     <?= $this->include('template/css') ?>
 </head>
-<body class="hold-transition <?= (!empty($body) ? $body : 'sidebar-mini layout-navbar-fixed') ?>">
+<body class="hold-transition <?= (!empty($body) ? $body : 'sidebar-mini layout-navbar-fixed') ?> ">
 
     <div class="wrapper">
         <?= $this->include('template/navbar') ?>
